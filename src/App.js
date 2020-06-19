@@ -7,11 +7,21 @@ import Timer from './containers/Timer';
 
 
 export class App extends React.Component {
+
+  state={targetDate: {}}
+
+  getTargetDate = (tDate) =>{
+    console.log(tDate);
+    this.setState({targetDate: tDate});
+  }
+
+  
+
   render() {
     return (
       <div className="App">
         <Header />
-        <DatePicker />
+        <DatePicker targetDate={this.getTargetDate} />
         <Timer />
       </div>
     );

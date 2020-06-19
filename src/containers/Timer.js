@@ -1,17 +1,72 @@
 import React, { Component } from 'react' 
+let time=0;
+class Timer extends Component {
 
-export class Timer extends Component {
+    values = {
+
+    }
 
     state = {
         days: 'D',
         hours: 'O',
         minutes: 'N',
-        seconds: 'E'
+        seconds: 'E',
+        timerOn: false
     }
 
+    hello = () => {
+        console.log("hi");
+    }
+
+    timeLeft = (countDownTime) => {
+
+        // if(Object.entries(this.props.targetDate).length > 0){
+        //     this.values = this.timeLeft(this.props.targetDate);
+        // }
+        // else{
+        //     console.log("DONE");
+        // }
+      
+        let now = new Date().getTime();
+        let time = countDownTime.date.getTime() - now;
+
+        let days = Math.floor(time/ (1000 * 60 * 60 * 24));
+        let hours = Math.floor((time % (1000 * 60 * 60 * 24))/ (1000 * 60 * 60));
+        let minutes = Math.floor((time %(1000 * 60 * 60))/ (1000 * 60));
+        let seconds = Math.floor((time %(1000 * 60))/1000);
+        console.log(days + ":" + hours + ":" + minutes + ":" +seconds);
+
+         this.setState({             
+            days,
+            hours,
+            minutes,
+            seconds,
+            timerOn: true});
+
+             console.log("");
+
+        //return {daysLeft, hoursLeft, minutesLeft, secondsLeft};
+
+    }
+
+    timeCounter = setInterval(() => {
+        if(this.state.timerOn)
+            console.log(time++);
+    }, 1000)
+
+    // shouldComponentUpdate(nexProps, nextState){
+    //     if(this.state === this.nextState){
+    //         return false;
+    //     }
+    //     return false;
+    // }
+
+
     render() {
+        // console.log("timer " + this.props.targetDate);
+        
         return (
-            <div style={timerOuter}>
+            <div style={timerOuter} onLoad={this.timeLeft}>
 
                 <div style={timerInner}>
                     <p style={timerValue}>{this.state.days}</p>
@@ -32,16 +87,6 @@ export class Timer extends Component {
                     <p style={timerValue}>{this.state.seconds}</p>
                     <p>seconds</p>
                 </div>
-
-
-                
-                {/* <div style={componentStyle} style="days">{this.state.days}</div>
-                <div style={componentStyle1}> : </div>
-                <div style={componentStyle} className="hours">{this.state.hours}</div>
-                <div style={componentStyle1}> : </div>
-                <div style={componentStyle} className="minutes">{this.state.minutes}</div>
-                <div style={componentStyle1}> : </div>
-                <div style={componentStyle} className="seconds">{this.state.seconds}</div> */}
             </div>
         )
     }
