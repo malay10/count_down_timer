@@ -97,6 +97,7 @@ const timerOuter = {
   color: "#fff",
   alignItem: "center",
   justifyContent: "center",
+  flexWrap: "wrap",
 };
 
 const timerInner = {
